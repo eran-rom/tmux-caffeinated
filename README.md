@@ -35,7 +35,7 @@ It's easiest to lose track of `caffeinate` exactly when you most rely on it:
 
 ```tmux
 set -g @plugin 'eran-rom/tmux-caffeinated'
-set -g status-right '#{caffeinate_status} | %a %h-%d %H:%M '
+set -g status-right '#{caffeinate_status} %a %h-%d %H:%M '
 ```
 
 Then press <kbd>prefix</kbd> + <kbd>I</kbd>.
@@ -47,14 +47,18 @@ git clone https://github.com/eran-rom/tmux-caffeinated ~/.tmux/plugins/tmux-caff
 ```
 
 ```tmux
-set -g status-right '#{caffeinate_status} | %a %h-%d %H:%M '
+set -g status-right '#{caffeinate_status} %a %h-%d %H:%M '
 run-shell ~/.tmux/plugins/tmux-caffeinated/caffeinate.tmux
 ```
 
-The indicator refreshes every `status-interval` seconds (default 15); lower it
-for snappier updates. The default coffee glyph and rounded ends need a
-[Nerd Font](https://www.nerdfonts.com/) — without one, set a plain-text icon and
-`@caffeinate_round 'off'`.
+By default the indicator is just the pill, and nothing at all when caffeinate
+is off. If you want a divider between it and the rest of your status line, set
+`@caffeinate_separator` (e.g. ` | `) — it's printed only while caffeinate is
+running, so it never lingers when it isn't. The indicator refreshes every
+`status-interval` seconds (default 15); lower it for snappier updates. The
+default coffee glyph and rounded ends need a
+[Nerd Font](https://www.nerdfonts.com/) — without one, set `@caffeinate_on_text`
+to plain text and `@caffeinate_round 'off'`.
 
 ## Configuration
 
@@ -62,17 +66,18 @@ All options are optional tmux user options (defaults shown):
 
 | Option | Default | Description |
 | ------ | ------- | ----------- |
-| `@caffeinate_on_icon`   | ` CAFFEINATED` | Icon/text shown while caffeinate is running. |
+| `@caffeinate_on_text`   | ` CAFFEINATED` | Text/glyph shown while caffeinate is running. |
 | `@caffeinate_on_style`  | `reverse,bold` | Style attributes for the pill (`reverse` = theme-adaptive). |
 | `@caffeinate_round`     | `on`           | Rounded (`on`) or square (`off`) pill ends. |
 | `@caffeinate_on_color`  | *(empty)*      | Explicit fg color; overrides `@caffeinate_on_style`. |
-| `@caffeinate_off_icon`  | *(empty)*      | Icon/text shown while caffeinate is **not** running. |
-| `@caffeinate_off_color` | *(empty)*      | Foreground color for the off icon. |
+| `@caffeinate_separator` | *(empty)*      | Divider printed after the indicator, only while caffeinate is running (e.g. ` \| `). |
+| `@caffeinate_off_text`  | *(empty)*      | Text/glyph shown while caffeinate is **not** running. |
+| `@caffeinate_off_color` | *(empty)*      | Foreground color for the off text. |
 
 ```tmux
 # e.g. a coffee cup when awake, a sleeping face when idle
-set -g @caffeinate_on_icon  '☕'
-set -g @caffeinate_off_icon '😴'
+set -g @caffeinate_on_text  '☕'
+set -g @caffeinate_off_text '😴'
 ```
 
 ## License

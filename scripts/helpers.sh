@@ -2,7 +2,7 @@
 # Shared helpers for tmux-caffeinated.
 
 # Read a tmux user option, falling back to a default when unset/empty.
-#   get_tmux_option "@caffeinate_on_icon" "CAFFEINATED"
+#   get_tmux_option "@caffeinate_on_text" "CAFFEINATED"
 get_tmux_option() {
 	local option="$1"
 	local default_value="$2"
