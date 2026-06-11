@@ -16,34 +16,25 @@ main() {
 
 	if ! caffeinate_is_running; then
 		# "off" state: emit the optional off text (empty by default).
-		local off_text off_color
+		local off_text
 		off_text="$(get_tmux_option "@caffeinate_off_text" "")"
 		# Nothing to show -> emit nothing at all, separator included.
 		[ -z "$off_text" ] && return
-		off_color="$(get_tmux_option "@caffeinate_off_color" "")"
-		if [ -n "$off_color" ]; then
-			printf '#[fg=%s]%s#[default]' "$off_color" "$off_text"
-		else
-			printf '%s' "$off_text"
-		fi
-		printf '%s' "$sep"
+		printf '%s%s' "$off_text" "$sep"
 		return
 	fi
 
 	# "on" state.
 	# Default uses a Nerd Font coffee glyph (U+F0F4, UTF-8 EF 83 B4) + label.
 	local coffee=$'\357\203\264'
-	local on_text on_color on_style
+	local on_text on_style
 	on_text="$(get_tmux_option "@caffeinate_on_text" "${coffee} CAFFEINATED")"
-	on_color="$(get_tmux_option "@caffeinate_on_color" "")"
 	on_style="$(get_tmux_option "@caffeinate_on_style" "reverse,bold")"
 
-	if [ -n "$on_color" ]; then
-		# Explicit colour wins, if the user set one.
-		printf '#[fg=%s]%s#[default]' "$on_color" "$on_text"
-	elif [ -n "$on_style" ]; then
+	if [ -n "$on_style" ]; then
 		# Theme-agnostic default: `reverse` swaps the theme's own fg/bg, so
 		# the indicator always contrasts with the status bar on any theme.
+		# (Set an explicit colour with e.g. `@caffeinate_on_style 'fg=colour208,bold'`.)
 		local round
 		round="$(get_tmux_option "@caffeinate_round" "on")"
 		if [ "$round" = "on" ]; then

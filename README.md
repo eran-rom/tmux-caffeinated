@@ -7,7 +7,7 @@
 [![ShellCheck](https://github.com/eran-rom/tmux-caffeinated/actions/workflows/lint.yml/badge.svg)](https://github.com/eran-rom/tmux-caffeinated/actions/workflows/lint.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Platform: macOS](https://img.shields.io/badge/platform-macOS-black?logo=apple)
-![Made for tmux](https://img.shields.io/badge/tmux-1.9%2B-1BB91F?logo=tmux&logoColor=white)
+![Made for tmux](https://img.shields.io/badge/tmux-plugin-1BB91F?logo=tmux&logoColor=white)
 
 ![tmux-caffeinated demo](demo/demo.gif)
 
@@ -67,17 +67,19 @@ All options are optional tmux user options (defaults shown):
 | Option | Default | Description |
 | ------ | ------- | ----------- |
 | `@caffeinate_on_text`   | ` CAFFEINATED` | Text/glyph shown while caffeinate is running. |
-| `@caffeinate_on_style`  | `reverse,bold` | Style attributes for the pill (`reverse` = theme-adaptive). |
+| `@caffeinate_on_style`  | `reverse,bold` | tmux style for the pill (`reverse` = theme-adaptive; or set `fg=`/`bg=` for fixed colors). |
 | `@caffeinate_round`     | `on`           | Rounded (`on`) or square (`off`) pill ends. |
-| `@caffeinate_on_color`  | *(empty)*      | Explicit fg color; overrides `@caffeinate_on_style`. |
 | `@caffeinate_separator` | *(empty)*      | Divider printed after the indicator, only while caffeinate is running (e.g. ` \| `). |
 | `@caffeinate_off_text`  | *(empty)*      | Text/glyph shown while caffeinate is **not** running. |
-| `@caffeinate_off_color` | *(empty)*      | Foreground color for the off text. |
 
 ```tmux
 # e.g. a coffee cup when awake, a sleeping face when idle
 set -g @caffeinate_on_text  '☕'
 set -g @caffeinate_off_text '😴'
+
+# or a plain fixed-color label instead of the theme-adaptive pill
+set -g @caffeinate_on_style 'fg=colour208,bold'
+set -g @caffeinate_round    'off'
 ```
 
 ## License
