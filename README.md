@@ -66,7 +66,7 @@ All options are optional tmux user options (defaults shown):
 
 | Option | Default | Description |
 | ------ | ------- | ----------- |
-| `@caffeinate_on_text`   | ` CAFFEINATED` | Text/glyph shown while caffeinate is running. |
+| `@caffeinate_on_text`   | coffee glyph + `CAFFEINATED` | Text/glyph shown while caffeinate is running. |
 | `@caffeinate_on_style`  | `reverse,bold` | tmux style for the pill (`reverse` = theme-adaptive; or set `fg=`/`bg=` for fixed colors). |
 | `@caffeinate_round`     | `on`           | Rounded (`on`) or square (`off`) pill ends. |
 | `@caffeinate_separator` | *(empty)*      | Divider printed after the indicator, only while caffeinate is running (e.g. ` \| `). |
